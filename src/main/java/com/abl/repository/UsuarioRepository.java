@@ -6,4 +6,5 @@ import com.abl.entity.User;
 public interface UsuarioRepository extends JpaRepository<User, String> {
 	
 	User save(User user);
+	User findByEmail(String email);
 }
