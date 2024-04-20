@@ -16,7 +16,7 @@ public class User {
 	String dni;
 	
 	@Column(name = "name")
-	String nombre;
+	String name;
 	
 	@Column(name = "phone_number")
 	int tlf;
@@ -25,11 +25,11 @@ public class User {
 	String email;
 	
 	@Column(name = "password")
-	String password;
+	private String password;
 	
-	public User(String dni, String nombre, int tlf, String email, String password) {
+	public User(String dni, String name, int tlf, String email, String password) {
 		this.dni = dni;
-		this.nombre = nombre;
+		this.name = name;
 		this.tlf = tlf;
 		this.email = email;
 		this.password = password;
@@ -45,12 +45,12 @@ public class User {
 		this.dni = dni;
 	}
 
-	public String getNombre() {
-		return nombre;
+	public String getName() {
+		return name;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public int getTlf() {

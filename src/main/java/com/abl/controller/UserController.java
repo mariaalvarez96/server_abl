@@ -3,9 +3,11 @@ package com.abl.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,6 +22,7 @@ public class UserController {
 	@Autowired
 	private UsuarioRepository usuarioRepository;
 
+	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping("/new")
 	public ResponseEntity<String> createUser(String dni, String name, String email, int tlf, String pass) {
 		//Comprueba si existe el dni
@@ -29,7 +32,7 @@ public class UserController {
 		
 		User newUser = new User();
 		newUser.setDni(dni);
-		newUser.setNombre(name);
+		newUser.setName(name);
 		newUser.setEmail(email);
 		newUser.setTlf(tlf);
 		newUser.setPassword(pass);
@@ -39,19 +42,17 @@ public class UserController {
 
 		return ResponseEntity.ok("User created successfully");		
 	}
-
+	
+	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping("/login")
-    public ResponseEntity<String> login(String email, String password) {
-        User user = usuarioRepository.findByEmail(email);
+    public ResponseEntity<Object> login(@RequestBody User user) {
+		User existingUser = usuarioRepository.findByEmail(user.getEmail());
 
-        if (user == null) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid email or password");
+        if (existingUser == null || !existingUser.getPassword().equals(user.getPassword())) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
         }
 
-        if (!user.getPassword().equals(password)) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid email or password");
-        }
-
-        return ResponseEntity.ok("Login successful");
+        // Usuario autenticado correctamente
+        return ResponseEntity.ok().body(existingUser);
     }
 }
