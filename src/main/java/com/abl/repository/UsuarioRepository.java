@@ -5,6 +5,7 @@ import com.abl.entity.User;
 
 public interface UsuarioRepository extends JpaRepository<User, String> {
 	
+	@SuppressWarnings("unchecked")
 	User save(User user);
 	User findByEmail(String email);
 }
