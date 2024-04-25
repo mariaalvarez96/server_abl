@@ -10,29 +10,29 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.abl.entity.User;
-import com.abl.repository.UsuarioRepository;
+import com.abl.repository.UserRepository;
 
 @RestController
 @RequestMapping("/users")
 public class UserController {
 
 	@Autowired
-	private UsuarioRepository usuarioRepository;
+	private UserRepository userRepository;
 
 	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping("/new")
 	public ResponseEntity<Object> createUser(@RequestBody User user) {
-		if (usuarioRepository.existsById(user.getDni())) {
+		if (userRepository.existsById(user.getDni())) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("User with this DNI already exists");
         }
-		usuarioRepository.save(user);
+		userRepository.save(user);
 		return ResponseEntity.ok().body(user);		
 	}
 	
 	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping("/login")
     public ResponseEntity<Object> login(@RequestBody User user) {
-		User existingUser = usuarioRepository.findByEmail(user.getEmail());
+		User existingUser = userRepository.findByEmail(user.getEmail());
 
         if (existingUser == null || !existingUser.getPassword().equals(user.getPassword())) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
@@ -43,10 +43,10 @@ public class UserController {
 	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping("/updatePassword")
 	public ResponseEntity<Object> updatePassword(@RequestBody User user){
-		if (usuarioRepository.existsById(user.getDni())) {
-	        User existingUser = usuarioRepository.findById(user.getDni()).get();
+		if (userRepository.existsById(user.getDni())) {
+	        User existingUser = userRepository.findById(user.getDni()).get();
 	        existingUser.setPassword(user.getPassword());
-	        User updatedUser = usuarioRepository.save(existingUser);
+	        User updatedUser = userRepository.save(existingUser);
 	        return ResponseEntity.ok().body(updatedUser); 
 	    } else {
 	        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
@@ -56,15 +56,15 @@ public class UserController {
 	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping("/updateUserData")
 	public ResponseEntity<Object> updateUserData(@RequestBody User user){
-		if (usuarioRepository.existsById(user.getDni())) {
+		if (userRepository.existsById(user.getDni())) {
 			
-	        User existingUser = usuarioRepository.findById(user.getDni()).get();
+	        User existingUser = userRepository.findById(user.getDni()).get();
 
 	        existingUser.setName(user.getName());
 	        existingUser.setEmail(user.getEmail());
 	        existingUser.setPhone(user.getPhone());
 	        
-	        User updatedUser = usuarioRepository.save(existingUser);
+	        User updatedUser = userRepository.save(existingUser);
 	        return ResponseEntity.ok().body(updatedUser); 
 	    } else {
 	        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");

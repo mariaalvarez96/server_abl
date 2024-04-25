@@ -1,5 +1,7 @@
 package com.abl.entity;
 
+import java.sql.Date;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -9,66 +11,68 @@ import jakarta.persistence.Table;
 
 
 @Entity
-@Table(name = "reservations")
+@Table(name = "booking")
 public class Booking {
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-	String id;
+    @Column(name = "id_booking")
+	String id_booking;
 	
-	@Column(name = "nombreUsuario")
-	String nombreUsuario;
+	@Column(name = "username")
+	String username;
 	
-	@Column(name = "nombreClase")
-	String nombreClase;
+	@Column(name = "id_class")
+	String id_class;
 	
-	@Column(name = "nombreAlumno")
-	String nombreAlumno;
+	@Column(name = "student_name")
+	String student_name;
 	
-	public Booking(String id, String nombreUsuario, String nombreClase, String nombre_alumno) {
-		this.id = id;
-		this.nombreUsuario = nombreUsuario;
-		this.nombreClase = nombreClase;
-		this.nombreAlumno = nombre_alumno;
+	@Column(name="date")
+	Date date;
+	
+	public Booking(String id_booking, String username, String id_class, String student_name) {
+		this.id_booking = id_booking;
+		this.username = username;
+		this.id_class = id_class;
+		this.student_name = student_name;
 	}
 
 	public String getId() {
-		return id;
+		return id_booking;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public void setId(String id_booking) {
+		this.id_booking = id_booking;
 	}
 
-	public String getNombre_usuario() {
-		return nombreUsuario;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setNombre_usuario(String nombreUsuario) {
-		this.nombreUsuario = nombreUsuario;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
-	public String getNombre_clase() {
-		return nombreClase;
+	public String getIdclass() {
+		return id_class;
 	}
 
-	public void setNombre_clase(String nombreClase) {
-		this.nombreClase = nombreClase;
+	public void setIdclass(String id_class) {
+		this.id_class = id_class;
 	}
 
-	public String getNombre_alumno() {
-		return nombreAlumno;
+	public String getStudentName() {
+		return student_name;
 	}
 
-	public void setNombre_alumno(String nombreAlumno) {
-		this.nombreAlumno = nombreAlumno;
+	public void setStudentName(String student_name) {
+		this.student_name = student_name;
 	}
 
 	@Override
 	public String toString() {
-		return "reserva [id=" + id + ", nombreUsuario=" + nombreUsuario + ", nombreClase=" + nombreClase
-				+ ", nombreAlumno=" + nombreAlumno + "]";
+		return "reserva [id_booking=" + id_booking + ", nombreUsuario=" + username + ", nombreClase=" + id_class
+				+ ", student_name=" + student_name + "]";
 	}
 		
 }
