@@ -11,17 +11,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.abl.entity.Booking;
 import com.abl.repository.BookingRepository;
+import com.abl.repository.ClassRepository;
 
 @RestController
 @RequestMapping("/classes")
 public class ClassController {
 
-	@Autowired
-	private ClassRepository classRepository;
 	
-	@CrossOrigin(origins = "http://localhost:4200")
-	@PostMapping("/list")
-	public ResponseEntity<Object> list(@RequestBody Booking booking) {
-		return ResponseEntity.ok().body(classRepository);		
-	}
 }

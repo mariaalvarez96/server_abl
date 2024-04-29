@@ -18,8 +18,8 @@ public class Booking {
     @Column(name = "id_booking")
 	String id_booking;
 	
-	@Column(name = "username")
-	String username;
+	@Column(name = "id_user")
+	String userId;
 	
 	@Column(name = "id_class")
 	String id_class;
@@ -27,12 +27,14 @@ public class Booking {
 	@Column(name = "student_name")
 	String student_name;
 	
-	public Booking(String id_booking, String username, String id_class, String student_name) {
+	public Booking(String id_booking, String userId, String id_class, String student_name) {
 		this.id_booking = id_booking;
-		this.username = username;
+		this.userId = userId;
 		this.id_class = id_class;
 		this.student_name = student_name;
 	}
+	
+	public Booking() {}
 
 	public String getId() {
 		return id_booking;
@@ -42,12 +44,12 @@ public class Booking {
 		this.id_booking = id_booking;
 	}
 
-	public String getUsername() {
-		return username;
+	public String getUserId() {
+		return userId;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 
 	public String getIdclass() {
@@ -68,7 +70,7 @@ public class Booking {
 
 	@Override
 	public String toString() {
-		return "reserva [id_booking=" + id_booking + ", nombreUsuario=" + username + ", nombreClase=" + id_class
+		return "reserva [id_booking=" + id_booking + ", nombreUsuario=" + userId + ", nombreClase=" + id_class
 				+ ", student_name=" + student_name + "]";
 	}
 		
