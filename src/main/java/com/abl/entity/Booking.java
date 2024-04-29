@@ -27,9 +27,6 @@ public class Booking {
 	@Column(name = "student_name")
 	String student_name;
 	
-	@Column(name="date")
-	Date date;
-	
 	public Booking(String id_booking, String username, String id_class, String student_name) {
 		this.id_booking = id_booking;
 		this.username = username;

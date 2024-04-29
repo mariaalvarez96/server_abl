@@ -14,49 +14,55 @@ public class Student {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-	String nombreAlumno;
+	String id;
 	
-	@Column(name = "curso")
-	String curso;
+	@Column(name = "name")
+	String name;
 	
-	@Column(name = "nombreUsuario")
-	String nombreUsuario;
+	@Column(name = "level")
+	String level;
 	
-	public Student(String nombreAlumno, String curso, String nombreUsuario) {
-		this.nombreAlumno = nombreAlumno;
-		this.curso = curso;
-		this.nombreUsuario = nombreUsuario;
+	@Column(name = "username")
+	String username;
+	
+	public Student(String name, String level, String username) {
+		this.name = name;
+		this.level = level;
+		this.username = username;
 	}
 
-	public String getNombre_alumno() {
-		return nombreAlumno;
+	public String getId() {
+		return id;
 	}
 
-	public void setNombre_alumno(String nombreAlumno) {
-		this.nombreAlumno = nombreAlumno;
+	public void setId(String id) {
+		this.id = id;
 	}
 
-	public String getCurso() {
-		return curso;
+	public String getName() {
+		return name;
 	}
 
-	public void setCurso(String curso) {
-		this.curso = curso;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public String getNombre_usuario() {
-		return nombreUsuario;
+	public String getLevel() {
+		return level;
 	}
 
-	public void setNombre_usuario(String nombreUsuario) {
-		this.nombreUsuario = nombreUsuario;
+	public void setLevel(String level) {
+		this.level = level;
 	}
 
-	@Override
-	public String toString() {
-		return "alumno [nombreAlumno=" + nombreAlumno + ", curso=" + curso + ", nombreUsuario=" + nombreUsuario
-				+ "]";
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 	
 	
+
 }
