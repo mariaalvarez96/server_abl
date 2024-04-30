@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,7 +31,7 @@ public class BookingController {
 	@Autowired
 	private UserRepository userRepository;
 	
-	@CrossOrigin
+	@CrossOrigin(origins = "http://localhost:4200")
 	@GetMapping("/{userId}")
 	public ResponseEntity<Object> getBookingsByUser(@PathVariable String userId){	
 		Optional<User> userOptional = userRepository.findById(userId);
@@ -50,9 +51,9 @@ public class BookingController {
 	}
 	
 	
-	@CrossOrigin
+	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping("/new")
-	public ResponseEntity<Object> createUser(@RequestBody Booking booking) {
+	public ResponseEntity<Object> createBooking(@RequestBody Booking booking) {
 		if (bookingRepository.existsById(booking.getId())) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Esta reserva ya existe.");
         }
@@ -60,6 +61,16 @@ public class BookingController {
 		return ResponseEntity.ok().body(booking);		
 	}
 	
-	
+	@CrossOrigin(origins = "http://localhost:4200")
+	@DeleteMapping("/{idBooking}")
+	public ResponseEntity<Object> deleteBooking(@PathVariable String idBooking){
+		if (bookingRepository.existsById(idBooking)) {
+			bookingRepository.deleteById(idBooking);
+	        return ResponseEntity.ok().build();
+        } else {
+        	return ResponseEntity.notFound().build();
+        }
+		
+	}
 	
 }
