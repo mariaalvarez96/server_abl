@@ -30,7 +30,7 @@ public class BookingController {
 	@Autowired
 	private UserRepository userRepository;
 	
-	@CrossOrigin(origins = "http://localhost:4200")
+	@CrossOrigin
 	@GetMapping("/{userId}")
 	public ResponseEntity<Object> getBookingsByUser(@PathVariable String userId){	
 		Optional<User> userOptional = userRepository.findById(userId);
@@ -50,7 +50,7 @@ public class BookingController {
 	}
 	
 	
-	@CrossOrigin(origins = "http://localhost:4200")
+	@CrossOrigin
 	@PostMapping("/new")
 	public ResponseEntity<Object> createUser(@RequestBody Booking booking) {
 		if (bookingRepository.existsById(booking.getId())) {
@@ -59,4 +59,7 @@ public class BookingController {
 		bookingRepository.save(booking);
 		return ResponseEntity.ok().body(booking);		
 	}
+	
+	
+	
 }
