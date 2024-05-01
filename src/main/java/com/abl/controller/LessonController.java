@@ -18,13 +18,12 @@ import com.abl.entity.User;
 import com.abl.repository.LessonRepository;
 
 @RestController
-@RequestMapping("/classes")
+@RequestMapping("/lessons")
 public class LessonController {
 
 	@Autowired
 	private LessonRepository lessonRepository;
 	
-	@CrossOrigin(origins = "http://localhost:4200")
 	@GetMapping("/list")
 	public ResponseEntity<Object> getLessons(){	
 		List<Lesson> allLessons = lessonRepository.findAll();

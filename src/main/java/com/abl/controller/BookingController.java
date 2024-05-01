@@ -31,16 +31,14 @@ public class BookingController {
 	@Autowired
 	private UserRepository userRepository;
 	
-	@CrossOrigin(origins = "http://localhost:4200")
 	@GetMapping("/{userId}")
 	public ResponseEntity<Object> getBookingsByUser(@PathVariable String userId){	
 		Optional<User> userOptional = userRepository.findById(userId);
 		if(userOptional.isPresent()) {
-			//Obtener todas las reservas
 			List<Booking> allBookings = bookingRepository.findAll();
 			List<Booking> userBookings = new ArrayList<>();
 			for(Booking booking : allBookings) {
-				if(booking.getUserId().equals(userId)) {
+				if(booking.getUser().getDni().equals(userId)) {
 					userBookings.add(booking);
 				}
 			}
@@ -50,18 +48,13 @@ public class BookingController {
         }
 	}
 	
-	
-	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping("/new")
-	public ResponseEntity<Object> createBooking(@RequestBody Booking booking) {
-		if (bookingRepository.existsById(booking.getId())) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Esta reserva ya existe.");
-        }
+	public ResponseEntity<Object> createBooking(@RequestBody Booking booking) {		
+		System.out.println(booking);
 		bookingRepository.save(booking);
 		return ResponseEntity.ok().body(booking);		
 	}
 	
-	@CrossOrigin(origins = "http://localhost:4200")
 	@DeleteMapping("/{idBooking}")
 	public ResponseEntity<Object> deleteBooking(@PathVariable String idBooking){
 		if (bookingRepository.existsById(idBooking)) {

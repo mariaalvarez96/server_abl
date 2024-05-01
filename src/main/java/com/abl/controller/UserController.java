@@ -19,7 +19,6 @@ public class UserController {
 	@Autowired
 	private UserRepository userRepository;
 
-	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping("/new")
 	public ResponseEntity<Object> createUser(@RequestBody User user) {
 		if (userRepository.existsById(user.getDni())) {
@@ -29,7 +28,7 @@ public class UserController {
 		return ResponseEntity.ok().body(user);		
 	}
 	
-	@CrossOrigin(origins = "http://localhost:4200")
+
 	@PostMapping("/login")
     public ResponseEntity<Object> login(@RequestBody User user) {
 		User existingUser = userRepository.findByEmail(user.getEmail());
@@ -40,7 +39,7 @@ public class UserController {
         return ResponseEntity.ok().body(existingUser);
     }
 	
-	@CrossOrigin(origins = "http://localhost:4200")
+
 	@PostMapping("/updatePassword")
 	public ResponseEntity<Object> updatePassword(@RequestBody User user){
 		if (userRepository.existsById(user.getDni())) {
@@ -53,7 +52,7 @@ public class UserController {
 	    }
 	}
 	
-	@CrossOrigin(origins = "http://localhost:4200")
+
 	@PostMapping("/updateUserData")
 	public ResponseEntity<Object> updateUserData(@RequestBody User user){
 		if (userRepository.existsById(user.getDni())) {
@@ -70,4 +69,8 @@ public class UserController {
 	        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
 	    }
 	}
+	
+	//@PostMapping("/upload")
+	//public ResponseEntity<Object> uploadProfilePic(@RequestBody String photo){
+	//}
 }

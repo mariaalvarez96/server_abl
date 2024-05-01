@@ -2,6 +2,8 @@ package com.abl.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -13,23 +15,34 @@ import jakarta.persistence.Table;
 public class Booking {
 
 	@Id
-    @Column(name = "id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	String id;
 	
-	@Column(name = "id_user")
-	String userId;
+	@ManyToOne()
+	@JoinColumn(name = "id_user")
+	User user;
 
-	@Column(name = "student_name")
-	String studentName;
+	@ManyToOne()
+	@JoinColumn(name = "student_id")
+	Student student;
 
 	@ManyToOne()
     @JoinColumn(name = "lesson_id")
 	Lesson lesson;
 
-	public Booking(String id, String userId, String student_name) {
+	@Column(name = "time")
+	String time;
+
+    @Column(name = "date")
+	String date;
+
+	public Booking(String id, User user, Student student, Lesson lesson, String time, String date) {
 		this.id = id;
-		this.userId = userId;
-		this.studentName = student_name;
+		this.user = user;
+		this.student = student;
+		this.lesson = lesson;
+		this.time = time;
+		this.date = date;
 	}
 	
 	public Booking() {}
@@ -42,20 +55,20 @@ public class Booking {
 		this.id = id;
 	}
 
-	public String getUserId() {
-		return userId;
+	public User getUser() {
+		return user;
 	}
 
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public void setUser(User user) {
+		this.user = user;
+	}
+	
+	public Student getStudent() {
+		return student;
 	}
 
-	public String getStudentName() {
-		return studentName;
-	}
-
-	public void setStudentName(String studentName) {
-		this.studentName = studentName;
+	public void setStudent(Student student) {
+		this.student = student;
 	}
 
 	public Lesson getLesson() {
@@ -64,6 +77,22 @@ public class Booking {
 
 	public void setLesson(Lesson lesson) {
 		this.lesson = lesson;
+	}
+
+	public String getTime() {
+		return time;
+	}
+
+	public void setTime(String time) {
+		this.time = time;
+	}
+
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
 	}
 
 }

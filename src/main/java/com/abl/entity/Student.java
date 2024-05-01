@@ -1,14 +1,20 @@
 package com.abl.entity;
 
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "student")
+@Table(name = "students")
 public class Student {
 
 	@Id
@@ -21,14 +27,33 @@ public class Student {
 	
 	@Column(name = "level")
 	String level;
+
+	@ManyToOne()
+    @JoinColumn(name = "id_user")
+    User user;
 	
-	@Column(name = "username")
-	String username;
+	@Column(name = "dni")
+	String dni;
 	
-	public Student(String name, String level, String username) {
+	@OneToMany(cascade=CascadeType.ALL, orphanRemoval=true)
+	@JoinColumn(name="student_name")
+	private List<Booking> bookings;
+	
+	public Student() {}
+			
+	public Student(String name, String level, User user, String dni) {
 		this.name = name;
 		this.level = level;
-		this.username = username;
+		this.user = user;
+		this.dni = dni;
+	}
+
+	public String getDni() {
+		return dni;
+	}
+
+	public void setDni(String dni) {
+		this.dni = dni;
 	}
 
 	public String getId() {
@@ -55,13 +80,15 @@ public class Student {
 		this.level = level;
 	}
 
-	public String getUsername() {
-		return username;
+	public User getUser() {
+		return user;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setUser(User user) {
+		this.user = user;
 	}
+
+	
 	
 	
 
