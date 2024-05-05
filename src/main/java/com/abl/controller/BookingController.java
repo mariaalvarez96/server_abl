@@ -50,7 +50,12 @@ public class BookingController {
 	
 	@PostMapping("/new")
 	public ResponseEntity<Object> createBooking(@RequestBody Booking booking) {		
-		System.out.println(booking);
+		// Verificar si ya existe una reserva con los mismos valores
+        if (bookingRepository.existsByUserAndStudentAndLessonAndTimeAndDate(
+                booking.getUser(), booking.getStudent(), booking.getLesson(),
+                booking.getTime(), booking.getDate())) {
+            return ResponseEntity.badRequest().body("La reserva ya existe.");
+        }
 		bookingRepository.save(booking);
 		return ResponseEntity.ok().body(booking);		
 	}

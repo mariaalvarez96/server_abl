@@ -7,6 +7,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Lob;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
@@ -30,6 +31,10 @@ public class User {
 	@Column(name = "password")
 	private String password;
 	
+	@Column(name = "avatar")
+	@Lob
+    byte[] avatar;
+	
 	@OneToMany(cascade=CascadeType.ALL, orphanRemoval=true)
 	@JoinColumn(name="id_user")
 	private List<Student> students;
@@ -38,12 +43,13 @@ public class User {
 	@JoinColumn(name="id_user")
 	private List<Booking> bookings;
 	
-	public User(String dni, String name, int phone, String email, String password) {
+	public User(String dni, String name, int phone, String email, String password, byte[] avatar) {
 		this.dni = dni;
 		this.name = name;
 		this.phone = phone;
 		this.email = email;
 		this.password = password;
+		this.avatar = avatar;
 	}
 
 	public User() {}
@@ -87,6 +93,16 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
+	public byte[] getAvatar() {
+		return avatar;
+	}
+
+	public void setAvatar(byte[] avatar) {
+		this.avatar = avatar;
+	}
+
+	
 	
 	
 }
