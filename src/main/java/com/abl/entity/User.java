@@ -1,10 +1,14 @@
 package com.abl.entity;
 
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Lob;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -12,27 +16,40 @@ import jakarta.persistence.Table;
 public class User {
 
 	@Id
-    @Column(name = "dni")
+    @Column(name = "id")
 	String dni;
 	
 	@Column(name = "name")
-	String nombre;
+	String name;
 	
 	@Column(name = "phone_number")
-	int tlf;
+	int phone;
 	
-	@Column(name = "email")
+	@Column(name = "email", unique=true)
 	String email;
 	
 	@Column(name = "password")
-	String password;
+	private String password;
 	
-	public User(String dni, String nombre, int tlf, String email, String password) {
+	@Column(name = "avatar")
+	@Lob
+    byte[] avatar;
+	
+	@OneToMany(cascade=CascadeType.ALL, orphanRemoval=true)
+	@JoinColumn(name="id_user")
+	private List<Student> students;
+	
+	@OneToMany(cascade=CascadeType.ALL, orphanRemoval=true)
+	@JoinColumn(name="id_user")
+	private List<Booking> bookings;
+	
+	public User(String dni, String name, int phone, String email, String password, byte[] avatar) {
 		this.dni = dni;
-		this.nombre = nombre;
-		this.tlf = tlf;
+		this.name = name;
+		this.phone = phone;
 		this.email = email;
 		this.password = password;
+		this.avatar = avatar;
 	}
 
 	public User() {}
@@ -45,20 +62,20 @@ public class User {
 		this.dni = dni;
 	}
 
-	public String getNombre() {
-		return nombre;
+	public String getName() {
+		return name;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public int getTlf() {
-		return tlf;
+	public int getPhone() {
+		return phone;
 	}
 
-	public void setTlf(int tlf) {
-		this.tlf = tlf;
+	public void setPhone(int phone) {
+		this.phone = phone;
 	}
 
 	public String getEmail() {
@@ -76,6 +93,16 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
+	public byte[] getAvatar() {
+		return avatar;
+	}
+
+	public void setAvatar(byte[] avatar) {
+		this.avatar = avatar;
+	}
+
+	
 	
 	
 }

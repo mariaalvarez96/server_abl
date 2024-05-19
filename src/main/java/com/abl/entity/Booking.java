@@ -5,33 +5,47 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 
 @Entity
-@Table(name = "reservations")
+@Table(name = "booking")
 public class Booking {
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	String id;
 	
-	@Column(name = "nombreUsuario")
-	String nombreUsuario;
-	
-	@Column(name = "nombreClase")
-	String nombreClase;
-	
-	@Column(name = "nombreAlumno")
-	String nombreAlumno;
-	
-	public Booking(String id, String nombreUsuario, String nombreClase, String nombre_alumno) {
+	@ManyToOne()
+	@JoinColumn(name = "id_user")
+	User user;
+
+	@ManyToOne()
+	@JoinColumn(name = "student_id")
+	Student student;
+
+	@ManyToOne()
+    @JoinColumn(name = "lesson_id")
+	Lesson lesson;
+
+	@Column(name = "time")
+	String time;
+
+    @Column(name = "date")
+	String date;
+
+	public Booking(String id, User user, Student student, Lesson lesson, String time, String date) {
 		this.id = id;
-		this.nombreUsuario = nombreUsuario;
-		this.nombreClase = nombreClase;
-		this.nombreAlumno = nombre_alumno;
+		this.user = user;
+		this.student = student;
+		this.lesson = lesson;
+		this.time = time;
+		this.date = date;
 	}
+	
+	public Booking() {}
 
 	public String getId() {
 		return id;
@@ -41,34 +55,44 @@ public class Booking {
 		this.id = id;
 	}
 
-	public String getNombre_usuario() {
-		return nombreUsuario;
+	public User getUser() {
+		return user;
 	}
 
-	public void setNombre_usuario(String nombreUsuario) {
-		this.nombreUsuario = nombreUsuario;
+	public void setUser(User user) {
+		this.user = user;
+	}
+	
+	public Student getStudent() {
+		return student;
 	}
 
-	public String getNombre_clase() {
-		return nombreClase;
+	public void setStudent(Student student) {
+		this.student = student;
 	}
 
-	public void setNombre_clase(String nombreClase) {
-		this.nombreClase = nombreClase;
+	public Lesson getLesson() {
+		return lesson;
 	}
 
-	public String getNombre_alumno() {
-		return nombreAlumno;
+	public void setLesson(Lesson lesson) {
+		this.lesson = lesson;
 	}
 
-	public void setNombre_alumno(String nombreAlumno) {
-		this.nombreAlumno = nombreAlumno;
+	public String getTime() {
+		return time;
 	}
 
-	@Override
-	public String toString() {
-		return "reserva [id=" + id + ", nombreUsuario=" + nombreUsuario + ", nombreClase=" + nombreClase
-				+ ", nombreAlumno=" + nombreAlumno + "]";
+	public void setTime(String time) {
+		this.time = time;
 	}
-		
+
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
+	}
+
 }
