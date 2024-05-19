@@ -7,11 +7,13 @@ import com.abl.entity.Lesson;
 import com.abl.entity.Student;
 import com.abl.entity.User;
 
-public interface BookingRepository extends JpaRepository<Booking, String>{
+public interface BookingRepository extends JpaRepository<Booking, String> {
 
 	@SuppressWarnings("unchecked")
 	Booking save(Booking booking);
+
 	Booking findById(Booking booking);
-	boolean existsByUserAndStudentAndLessonAndTimeAndDate(
-            User user, Student student, Lesson lesson, String time, String date);
+
+	boolean existsByUserAndStudentAndLessonAndTimeAndDate(User user, Student student, Lesson lesson, String time,
+			String date);
 }

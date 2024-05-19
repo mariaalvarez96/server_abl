@@ -10,7 +10,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
@@ -26,15 +25,16 @@ public class Lesson {
 	@Column(name = "name")
 	String name;
 
-	@OneToMany(cascade=CascadeType.ALL, orphanRemoval=true)
-	@JoinColumn(name="id_class")
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name = "id_class")
 	private List<Booking> bookings;
 
-	@OneToMany(cascade=CascadeType.ALL, orphanRemoval=true)
-	@JoinColumn(name="lesson_id")
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name = "lesson_id")
 	private List<LessonSchedule> schedules;
 
-	public Lesson() {}
+	public Lesson() {
+	}
 
 	public Lesson(String id, String name, List<LessonSchedule> schedules) {
 		super();
@@ -58,7 +58,7 @@ public class Lesson {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
 	public List<LessonSchedule> getSchedules() {
 		return this.schedules;
 	}
