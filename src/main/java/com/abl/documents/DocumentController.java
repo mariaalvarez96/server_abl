@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/download")
 public class DocumentController {
-
 	@GetMapping("/{fileName}")
 	public ResponseEntity<InputStreamResource> descargarPDF(@PathVariable String fileName) throws IOException {
 		String directory = "src/main/java/com/abl/documents/";
