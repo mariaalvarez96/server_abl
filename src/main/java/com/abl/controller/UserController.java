@@ -45,7 +45,6 @@ public class UserController {
 		}
 
 		String encodedPassword = passwordEncoder.encode(user.getPassword());
-		System.out.println(encodedPassword);
 		user.setPassword(encodedPassword);
 
 		userRepository.save(user);
