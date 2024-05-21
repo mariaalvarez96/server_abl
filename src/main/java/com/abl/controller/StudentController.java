@@ -26,34 +26,33 @@ public class StudentController {
 
 	@Autowired
 	private StudentRepository studentRepository;
-	
+
 	@Autowired
 	private UserRepository userRepository;
-	
+
 	@PostMapping("/new")
 	public ResponseEntity<Object> createStudent(@RequestBody Student student) {
-		String studentId = student.getId();
 		if (studentRepository.existsById(student.getDni())) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Student already exists");
-        }
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Student already exists");
+		}
 		studentRepository.save(student);
-		return ResponseEntity.ok().body(student);		
+		return ResponseEntity.ok().body(student);
 	}
-	
+
 	@GetMapping("/{userId}")
-	public ResponseEntity<Object> getStudentsByUser(@PathVariable String userId){	
+	public ResponseEntity<Object> getStudentsByUser(@PathVariable String userId) {
 		Optional<User> userOptional = userRepository.findById(userId);
-		if(userOptional.isPresent()) {
+		if (userOptional.isPresent()) {
 			List<Student> allStudents = studentRepository.findAll();
 			List<Student> userStudents = new ArrayList<>();
-			for(Student student : allStudents) {
-				if(student.getUser().getDni().equals(userId)) {
+			for (Student student : allStudents) {
+				if (student.getUser().getDni().equals(userId)) {
 					userStudents.add(student);
 				}
 			}
-            return ResponseEntity.ok().body(userStudents);
+			return ResponseEntity.ok().body(userStudents);
 		} else {
-            return ResponseEntity.notFound().build();
-        }
+			return ResponseEntity.notFound().build();
+		}
 	}
 }

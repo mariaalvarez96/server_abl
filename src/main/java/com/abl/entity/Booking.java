@@ -9,7 +9,6 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
-
 @Entity
 @Table(name = "booking")
 public class Booking {
@@ -17,7 +16,7 @@ public class Booking {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	String id;
-	
+
 	@ManyToOne()
 	@JoinColumn(name = "id_user")
 	User user;
@@ -27,13 +26,13 @@ public class Booking {
 	Student student;
 
 	@ManyToOne()
-    @JoinColumn(name = "lesson_id")
+	@JoinColumn(name = "lesson_id")
 	Lesson lesson;
 
 	@Column(name = "time")
 	String time;
 
-    @Column(name = "date")
+	@Column(name = "date")
 	String date;
 
 	public Booking(String id, User user, Student student, Lesson lesson, String time, String date) {
@@ -44,8 +43,9 @@ public class Booking {
 		this.time = time;
 		this.date = date;
 	}
-	
-	public Booking() {}
+
+	public Booking() {
+	}
 
 	public String getId() {
 		return id;
@@ -62,7 +62,7 @@ public class Booking {
 	public void setUser(User user) {
 		this.user = user;
 	}
-	
+
 	public Student getStudent() {
 		return student;
 	}

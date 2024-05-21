@@ -18,29 +18,30 @@ import jakarta.persistence.Table;
 public class Student {
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
 	String id;
-	
+
 	@Column(name = "name")
 	String name;
-	
+
 	@Column(name = "level")
 	String level;
 
 	@ManyToOne()
-    @JoinColumn(name = "id_user")
-    User user;
-	
+	@JoinColumn(name = "id_user")
+	User user;
+
 	@Column(name = "dni")
 	String dni;
-	
-	@OneToMany(cascade=CascadeType.ALL, orphanRemoval=true)
-	@JoinColumn(name="student_name")
+
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name = "student_name")
 	private List<Booking> bookings;
-	
-	public Student() {}
-			
+
+	public Student() {
+	}
+
 	public Student(String name, String level, User user, String dni) {
 		this.name = name;
 		this.level = level;
@@ -87,9 +88,5 @@ public class Student {
 	public void setUser(User user) {
 		this.user = user;
 	}
-
-	
-	
-	
 
 }

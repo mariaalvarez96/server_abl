@@ -16,33 +16,33 @@ import jakarta.persistence.Table;
 public class User {
 
 	@Id
-    @Column(name = "id")
+	@Column(name = "id")
 	String dni;
-	
+
 	@Column(name = "name")
 	String name;
-	
+
 	@Column(name = "phone_number")
 	int phone;
-	
-	@Column(name = "email", unique=true)
+
+	@Column(name = "email", unique = true)
 	String email;
-	
+
 	@Column(name = "password")
 	private String password;
-	
+
 	@Column(name = "avatar")
 	@Lob
-    byte[] avatar;
-	
-	@OneToMany(cascade=CascadeType.ALL, orphanRemoval=true)
-	@JoinColumn(name="id_user")
+	byte[] avatar;
+
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name = "id_user")
 	private List<Student> students;
-	
-	@OneToMany(cascade=CascadeType.ALL, orphanRemoval=true)
-	@JoinColumn(name="id_user")
+
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name = "id_user")
 	private List<Booking> bookings;
-	
+
 	public User(String dni, String name, int phone, String email, String password, byte[] avatar) {
 		this.dni = dni;
 		this.name = name;
@@ -52,7 +52,8 @@ public class User {
 		this.avatar = avatar;
 	}
 
-	public User() {}
+	public User() {
+	}
 
 	public String getDni() {
 		return dni;
@@ -102,7 +103,4 @@ public class User {
 		this.avatar = avatar;
 	}
 
-	
-	
-	
 }

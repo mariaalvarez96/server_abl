@@ -10,7 +10,7 @@ import jakarta.persistence.Table;
 public class Customers {
 
 	@Id
-    @Column(name = "id")
+	@Column(name = "id")
 	String id;
 
 	public String getId() {
@@ -24,8 +24,5 @@ public class Customers {
 	public Customers() {
 		super();
 	}
-	
-	
-	
-	
+
 }

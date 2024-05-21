@@ -1,7 +1,6 @@
 
 package com.abl.entity;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -21,16 +20,17 @@ public class LessonSchedule {
 	String id;
 
 	@ManyToOne()
-	@JoinColumn(name="lesson_id")
+	@JoinColumn(name = "lesson_id")
 	Lesson lesson;
 
-	@Column(name="day")
+	@Column(name = "day")
 	int day;
-	
-	@Column(name="time")
+
+	@Column(name = "time")
 	String time;
 
-	public LessonSchedule() {}
+	public LessonSchedule() {
+	}
 
 	public LessonSchedule(String id, int day, String time) {
 		super();
